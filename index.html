@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Technician Interview Prep | Ty</title>
+    <link rel="icon" type="image/png" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+             font-family: "Google Sans Code", monospace !important;
+        }
+
+        body {
+            font-family: "Google Sans Code", monospace !important;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            color: #333;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.1);
+            padding: 10px 15px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        .control-group label {
+            color: white;
+            font-weight: 500;
+        }
+
+        .control-group select, .control-group input {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 15px;
+            background: rgba(255,255,255,0.9);
+            font-size: 14px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            max-width: 600px;
+            height: 8px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 4px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #45a049);
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .progress-text {
+            color: white;
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .flashcard-container {
+            perspective: 1000px;
+            width: 100%;
+            max-width: 800px;
+            height: 500px;
+            margin-bottom: 30px;
+        }
+
+        .flashcard {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .card-front {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            color: #333;
+        }
+
+        .card-back {
+            background: linear-gradient(135deg, #2C3E50 0%, #34495E 100%);
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .card-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow-y: auto;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            font-weight: 600;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .answer-text {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            white-space: pre-line;
+        }
+
+        .card-label {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .card-number {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.1);
+            padding: 8px 12px;
+            border-radius: 50%;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .navigation {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .nav-btn {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .nav-btn:active {
+            transform: translateY(0);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .action-btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255,255,255,0.9);
+            color: #333;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            background: white;
+            transform: translateY(-1px);
+        }
+
+        .flip-hint {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            opacity: 0.7;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        .filter-tags {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-tag {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-tag.active {
+            background: rgba(255,255,255,0.9);
+            color: #333;
+        }
+
+        .stats {
+            background: rgba(255,255,255,0.1);
+            padding: 15px 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            color: white;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .mobile-swipe-hint {
+            display: none;
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            z-index: 1000;
+            animation: fadeInOut 3s ease-in-out;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; }
+            20%, 80% { opacity: 1; }
+        }
+
+        .touch-feedback {
+            transform: scale(0.98);
+            transition: transform 0.1s ease;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            .header {
+                margin-bottom: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+                margin-bottom: 5px;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .flashcard-container {
+                height: 450px;
+                margin-bottom: 20px;
+            }
+            
+            .card-face {
+                padding: 25px 20px;
+            }
+            
+            .question-text {
+                font-size: 1.1rem;
+                line-height: 1.5;
+            }
+            
+            .answer-text {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+            
+            .controls {
+                flex-direction: column;
+                gap: 15px;
+                margin-bottom: 20px;
+            }
+
+            .control-group {
+                width: 100%;
+                justify-content: space-between;
+                padding: 12px 20px;
+            }
+
+            .control-group select, .control-group input {
+                padding: 10px 15px;
+                font-size: 16px;
+                min-height: 44px;
+            }
+            
+            .navigation {
+                width: 100%;
+                justify-content: space-between;
+                margin-bottom: 15px;
+            }
+
+            .nav-btn {
+                flex: 1;
+                max-width: 45%;
+                padding: 18px 20px;
+                font-size: 1rem;
+                min-height: 50px;
+            }
+
+            .action-buttons {
+                gap: 10px;
+                margin-bottom: 15px;
+            }
+
+            .action-btn {
+                padding: 15px 18px;
+                font-size: 0.9rem;
+                min-height: 44px;
+                flex: 1;
+                min-width: calc(50% - 5px);
+            }
+
+            .progress-bar {
+                margin-bottom: 15px;
+                height: 10px;
+            }
+
+            .stats {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+                margin-top: 15px;
+            }
+
+            .card-label, .card-number {
+                font-size: 0.8rem;
+                padding: 6px 12px;
+            }
+
+            .flip-hint {
+                font-size: 0.75rem;
+                padding: 6px 12px;
+            }
+
+            .mobile-swipe-hint {
+                display: block;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 8px;
+            }
+
+            .header h1 {
+                font-size: 1.6rem;
+            }
+
+            .flashcard-container {
+                height: 400px;
+            }
+
+            .card-face {
+                padding: 20px 15px;
+            }
+
+            .question-text {
+                font-size: 1rem;
+            }
+
+            .answer-text {
+                font-size: 0.9rem;
+            }
+
+            .control-group {
+                padding: 10px 15px;
+            }
+
+            .nav-btn {
+                padding: 16px 15px;
+                font-size: 0.9rem;
+            }
+
+            .action-btn {
+                padding: 12px 10px;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (orientation: landscape) and (max-height: 600px) {
+            .header {
+                margin-bottom: 10px;
+            }
+
+            .header h1 {
+                font-size: 1.4rem;
+                margin-bottom: 5px;
+            }
+
+            .header p {
+                display: none;
+            }
+
+            .flashcard-container {
+                height: 300px;
+                margin-bottom: 15px;
+            }
+
+            .controls {
+                margin-bottom: 10px;
+            }
+
+            .stats {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Data Technician Interview Prep</h1>
+       
+    </div>
+
+    <div class="controls">
+        <div class="control-group">
+            <label>Category:</label>
+            <select id="categoryFilter">
+                <option value="all">All Questions</option>
+                <option value="networking">Networking</option>
+                <option value="hardware">Hardware</option>
+                <option value="troubleshooting">Troubleshooting</option>
+                <option value="security">Security</option>
+                <option value="general">General</option>
+            </select>
+        </div>
+        <div class="control-group">
+            <label>Study Mode:</label>
+            <select id="studyMode">
+                <option value="sequential">Sequential</option>
+                <option value="random">Random</option>
+                <option value="difficult">Review Difficult</option>
+            </select>
+        </div>
+        <div class="control-group">
+            <input type="checkbox" id="autoFlip">
+            <label for="autoFlip">Auto-flip (5s)</label>
+        </div>
+    </div>
+
+    <div class="progress-text">
+        <span id="progressText">Question 1 of 150</span>
+    </div>
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <div class="flashcard-container">
+        <div class="flashcard" id="flashcard">
+            <div class="card-face card-front">
+                <div class="card-label">Question</div>
+                <div class="card-number" id="cardNumber">1</div>
+                <div class="card-content">
+                    <div class="question-text" id="questionText">Loading questions...</div>
+                </div>
+                <div class="flip-hint">Click to reveal answer</div>
+            </div>
+            <div class="card-face card-back">
+                <div class="card-label">Answer</div>
+                <div class="card-number" id="cardNumberBack">1</div>
+                <div class="card-content">
+                    <div class="answer-text" id="answerText">Loading...</div>
+                </div>
+                <div class="flip-hint">Click to see question</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" id="prevBtn">← Previous</button>
+        <button class="nav-btn" id="nextBtn">Next →</button>
+    </div>
+
+    <div class="action-buttons">
+        <button class="action-btn" id="shuffleBtn">🔀 Shuffle</button>
+        <button class="action-btn" id="markDifficult">⭐ Mark Difficult</button>
+        <button class="action-btn" id="resetProgress">🔄 Reset Progress</button>
+    </div>
+
+    <div class="stats">
+        <div>Progress: <span id="completionRate">0%</span> | Difficult: <span id="difficultCount">0</span> | Total: <span id="totalCount">150</span></div>
+    </div>
+
+    <div class="mobile-swipe-hint" id="swipeHint">
+        ← Swipe left/right to navigate • Tap to flip →
+    </div>
+
+    <script>
+        class FlashcardApp {
+            constructor() {
+                this.questions = [];
+                this.currentIndex = 0;
+                this.isFlipped = false;
+                this.viewedQuestions = new Set();
+                this.difficultQuestions = new Set();
+                this.filteredQuestions = [];
+                this.autoFlipTimeout = null;
+                
+                this.initializeQuestions();
+                this.initializeElements();
+                this.bindEvents();
+                this.updateDisplay();
+            }
+
+            initializeQuestions() {
+                const providedQuestions = [
+                    {
+                        question: "What are some common physical tools for troubleshooting fiber optic issues?",
+                        answer: "• Power/Light Meter\n• Loopback\n• Optical Time Domain Reflectometer (OTDR)\n• Visual Fault Locator\n• 'Good fiber' for reference testing",
+                        category: "troubleshooting"
+                    },
+                    {
+                        question: "Which is typically used for longer distance transmissions?",
+                        answer: "Single mode fiber - it has a smaller core diameter and uses laser light, allowing signals to travel much longer distances with less attenuation compared to multimode fiber.",
+                        category: "networking"
+                    },
+                    {
+                        question: "What is a type of 'connectionless' protocol?",
+                        answer: "UDP (User Datagram Protocol) - Unlike TCP, UDP doesn't establish a connection before sending data and doesn't guarantee delivery or order of packets.",
+                        category: "networking"
+                    },
+                    {
+                        question: "A WAN is different from a LAN because it is...",
+                        answer: "Geographically displaced - WANs cover larger geographical areas and connect multiple LANs across cities, countries, or continents.",
+                        category: "networking"
+                    },
+                    {
+                        question: "What protocol does the 'ping' command utilize?",
+                        answer: "ICMP (Internet Control Message Protocol) - It sends echo request packets and waits for echo reply packets to test connectivity and measure round-trip time.",
+                        category: "networking"
+                    },
+                    {
+                        question: "What is the typical difference between layer 2 and layer 3 network devices?",
+                        answer: "IP Routing - Layer 3 devices (routers) can route packets between different networks using IP addresses, while Layer 2 devices (switches) only forward frames within the same network using MAC addresses.",
+                        category: "networking"
+                    },
+                    {
+                        question: "What is the difference between 2.4GHz and 5GHz WiFi?",
+                        answer: "5GHz has less range than 2.4GHz but offers higher speeds and less congestion. 2.4GHz penetrates walls better and has longer range but is more crowded and slower.",
+                        category: "networking"
+                    },
+                    {
+                        question: "Explain the 7 layers of the OSI Model in detail",
+                        answer: "The Seven OSI Layers split network communications into abstraction layers:\n1. Physical - Electrical connections and signals\n2. Data Link - Frame formatting and MAC addresses\n3. Network - IP routing and addressing\n4. Transport - TCP/UDP and reliable delivery\n5. Session - Connection management\n6. Presentation - Encryption and data formatting\n7. Application - User applications and protocols\nMnemonic: 'Please Do Not Throw Sausage Pizza Away'",
+                        category: "networking"
+                    },
+                    {
+                        question: "During the boot process, what determines the location of the OS?",
+                        answer: "Master Boot Record (MBR) - Located in the first sector of the boot drive, it contains the partition table and boot loader code that identifies where the operating system is located.",
+                        category: "hardware"
+                    },
+                    {
+                        question: "What is RAID and what are the main types?",
+                        answer: "RAID (Redundant Array of Independent Disks) combines multiple drives for performance and/or redundancy:\n• RAID 0 - Striping (performance, no redundancy)\n• RAID 1 - Mirroring (redundancy)\n• RAID 5 - Striping with parity (performance + redundancy)\n• RAID 6 - Double parity (can survive 2 drive failures)\n• RAID 10 - Combination of mirroring and striping",
+                        category: "hardware"
+                    },
+                    {
+                        question: "What is the purpose of UPS in a data center?",
+                        answer: "Uninterruptible Power Supply (UPS) provides backup power during outages, protects against power fluctuations, gives time for graceful shutdown, and maintains power quality to prevent data loss and equipment damage.",
+                        category: "hardware"
+                    },
+                    {
+                        question: "What is the difference between hot swappable and cold swappable components?",
+                        answer: "Hot swappable components can be removed and replaced while the system is running without powering down. Cold swappable components require the system to be powered off before replacement.",
+                        category: "hardware"
+                    },
+                    {
+                        question: "What are the main environmental factors to monitor in a data center?",
+                        answer: "• Temperature (typically 68-75°F)\n• Humidity (45-55% relative humidity)\n• Airflow and cooling efficiency\n• Power consumption and distribution\n• Fire suppression systems\n• Physical security and access control",
+                        category: "general"
+                    },
+                    {
+                        question: "What is SNMP and how is it used in data centers?",
+                        answer: "Simple Network Management Protocol - Used for monitoring and managing network devices. It allows centralized monitoring of servers, switches, routers, and other equipment for performance metrics, alerts, and configuration management.",
+                        category: "networking"
+                    },
+                    {
+                        question: "What are the different types of network cables used in data centers?",
+                        answer: "• Cat5e/Cat6/Cat6a - Copper twisted pair for shorter distances\n• Fiber optic (single-mode/multi-mode) - Long distance, high speed\n• Power cables - Various gauges for different power requirements\n• Console cables - For direct device management\n• Coaxial cables - For specific applications",
+                        category: "hardware"
+                    },
+                    {
+                        question: "What is virtualization and why is it important in data centers?",
+                        answer: "Virtualization creates multiple virtual machines on a single physical server, maximizing hardware utilization, reducing costs, enabling rapid deployment, providing isolation between applications, and simplifying disaster recovery.",
+                        category: "general"
+                    },
+                    {
+                        question: "How do you troubleshoot a server that won't boot?",
+                        answer: "1. Check power connections and LED indicators\n2. Verify POST process and error codes\n3. Check memory seating and configuration\n4. Test with minimal hardware configuration\n5. Check boot device and BIOS settings\n6. Review system logs and error messages\n7. Test power supply and motherboard if needed",
+                        category: "troubleshooting"
+                    },
+                    {
+                        question: "What is the difference between redundancy and fault tolerance?",
+                        answer: "Redundancy provides backup components that take over when primary components fail. Fault tolerance is the system's ability to continue operating normally even when components fail, often using redundant components seamlessly.",
+                        category: "general"
+                    },
+                    {
+                        question: "What security measures are important in data centers?",
+                        answer: "• Physical access controls (biometrics, keycards)\n• Network segmentation and firewalls\n• Monitoring and surveillance systems\n• Environmental controls and alarms\n• Background checks for personnel\n• Incident response procedures\n• Regular security audits and updates",
+                        category: "security"
+                    },
+                    {
+                        question: "What is bandwidth and how do you calculate it?",
+                        answer: "Bandwidth is the maximum data transfer rate of a network connection, measured in bits per second (bps). Calculate by: Data transferred ÷ Time taken. For example: 1GB in 8 seconds = 1 Gigabit per second (considering 8 bits per byte).",
+                        category: "networking"
+                    }
+                ];
+
+                const additionalQuestions = [
+                    {
+                        question: "What is the difference between TCP and UDP?",
+                        answer: "TCP is connection-oriented, reliable, and guarantees delivery order. UDP is connectionless, faster, but doesn't guarantee delivery. TCP is used for web browsing, email; UDP for streaming, gaming.",
+                        category: "networking"
+                    },
+                    {
+                        question: "What are the standard rack unit measurements?",
+                        answer: "1U = 1.75 inches (44.45mm) in height. Standard rack width is 19 inches. Common server sizes are 1U, 2U, and 4U. A full rack is typically 42U tall.",
+                        category: "hardware"
+                    },
+                    {
+                        question: "What is SLA and why is it important?",
+                        answer: "Service Level Agreement defines the expected level of service, including uptime guarantees (99.9%, 99.99%), response times, and penalties for non-compliance. Critical for data center operations.",
+                        category: "general"
+                    },
+                    {
+                        question: "How do you handle a critical server failure?",
+                        answer: "1. Assess impact and notify stakeholders\n2. Document incident details\n3. Follow emergency procedures\n4. Implement failover if available\n5. Begin troubleshooting systematically\n6. Coordinate with vendors if needed\n7. Communicate status updates regularly",
+                        category: "troubleshooting"
+                    },
+                    {
+                        question: "What is PDU and its role in data centers?",
+                        answer: "Power Distribution Unit distributes electrical power to multiple devices. Types include basic PDU (power strips) and intelligent PDU (monitoring, remote control, individual outlet switching).",
+                        category: "hardware"
+                    },
+                    {
+                        question: "What is DNS and how does it work?",
+                        answer: "Domain Name System translates human-readable domain names to IP addresses. Process: Client queries DNS resolver → Root servers → TLD servers → Authoritative servers → Returns IP address.",
+                        category: "networking"
+                    },
+                    {
+                        question: "What are common causes of network latency?",
+                        answer: "• Distance (speed of light)\n• Network congestion\n• Processing delays in routers/switches\n• Queuing delays\n• Transmission medium (fiber vs copper)\n• Network protocol overhead\n• Hardware limitations",
+                        category: "troubleshooting"
+                    },
+                    {
+                        question: "What is load balancing and its benefits?",
+                        answer: "Distributes incoming requests across multiple servers to prevent overload, improve performance, ensure high availability, and provide redundancy. Types: round-robin, least connections, weighted algorithms.",
+                        category: "networking"
+                    },
+                    {
+                        question: "How do you monitor server performance?",
+                        answer: "Monitor CPU usage, memory utilization, disk I/O, network traffic, temperature, power consumption. Use tools like SNMP, system logs, performance counters, and monitoring software for alerts and trending.",
+                        category: "general"
+                    },
+                    {
+                        question: "What is a VLAN and its purpose?",
+                        answer: "Virtual Local Area Network logically separates network traffic on the same physical switch. Benefits: security isolation, broadcast domain control, network organization, simplified management.",
+                        category: "networking"
+                    },
+                    {
+                        question: "What safety procedures should you follow in a data center?",
+                        answer: "• Proper grounding procedures\n• Electrical safety and lockout/tagout\n• Lifting techniques for heavy equipment\n• Fire safety and suppression systems\n• Emergency evacuation procedures\n• Personal protective equipment (PPE)\n• Chemical handling for cleaning supplies",
+                        category: "security"
+                    },
+                    {
+                        question: "What is the difference between backup and disaster recovery?",
+                        answer: "Backup is copying data for protection against data loss. Disaster recovery is a complete plan to restore entire business operations after catastrophic events, including infrastructure, systems, and processes.",
+                        category: "general"
+                    },
+                    {
+                        question: "How do you troubleshoot network connectivity issues?",
+                        answer: "1. Check physical connections\n2. Verify IP configuration\n3. Test with ping and traceroute\n4. Check DNS resolution\n5. Verify routing tables\n6. Test different protocols\n7. Check firewall rules\n8. Review switch/router logs",
+                        category: "troubleshooting"
+                    },
+                    {
+                        question: "What is DHCP and how does it work?",
+                        answer: "Dynamic Host Configuration Protocol automatically assigns IP addresses, subnet masks, gateways, and DNS servers to devices. Process: Discover → Offer → Request → Acknowledge (DORA).",
+                        category: "networking"
+                    },
+                    {
+                        question: "What are the main types of server hardware failures?",
+                        answer: "• Power supply failures\n• Memory (RAM) errors\n• Hard drive failures\n• Motherboard issues\n• CPU problems\n• Network interface card failures\n• Cooling system failures\n• Cable/connection problems",
+                        category: "hardware"
+                    },
+                    {
+                        question: "What is change management in data center operations?",
+                        answer: "Formal process for implementing changes safely: planning, approval, testing, documentation, implementation, and rollback procedures. Prevents outages and maintains system stability.",
+                        category: "general"
+                    },
+                    {
+                        question: "How do you handle cable management in server racks?",
+                        answer: "Use cable management arms, velcro ties, cable trays, proper labeling, maintain service loops, separate power and data cables, follow structured cabling standards, document connections.",
+                        category: "hardware"
+                    },
+                    {
+                        question: "What is firmware and why is it important?",
+                        answer: "Low-level software that controls hardware components. Critical for system stability, security patches, performance improvements, and new feature support. Must be kept updated but with careful testing.",
+                        category: "hardware"
+                    },
+                    {
+                        question: "What are the different types of data center tiers?",
+                        answer: "Tier I: Basic (99.671% uptime)\nTier II: Redundant components (99.741%)\nTier III: Concurrent maintainable (99.982%)\nTier IV: Fault tolerant (99.995%)\nHigher tiers have more redundancy and less downtime.",
+                        category: "general"
+                    },
+                    {
+                        question: "How do you perform server maintenance safely?",
+                        answer: "1. Schedule during maintenance windows\n2. Notify stakeholders\n3. Create rollback plan\n4. Use proper grounding\n5. Follow lockout/tagout procedures\n6. Test changes in non-production first\n7. Document all actions\n8. Verify system functionality post-maintenance",
+                        category: "general"
+                    }
+                ];
+
+                this.questions = [...providedQuestions, ...additionalQuestions];
+                this.filteredQuestions = [...this.questions];
+            }
+
+            initializeElements() {
+                this.flashcard = document.getElementById('flashcard');
+                this.questionText = document.getElementById('questionText');
+                this.answerText = document.getElementById('answerText');
+                this.cardNumber = document.getElementById('cardNumber');
+                this.cardNumberBack = document.getElementById('cardNumberBack');
+                this.prevBtn = document.getElementById('prevBtn');
+                this.nextBtn = document.getElementById('nextBtn');
+                this.progressFill = document.getElementById('progressFill');
+                this.progressText = document.getElementById('progressText');
+                this.categoryFilter = document.getElementById('categoryFilter');
+                this.studyMode = document.getElementById('studyMode');
+                this.autoFlip = document.getElementById('autoFlip');
+                this.completionRate = document.getElementById('completionRate');
+                this.difficultCount = document.getElementById('difficultCount');
+                this.totalCount = document.getElementById('totalCount');
+            }
+
+            bindEvents() {
+                this.flashcard.addEventListener('click', () => this.flipCard());
+                this.prevBtn.addEventListener('click', () => this.previousCard());
+                this.nextBtn.addEventListener('click', () => this.nextCard());
+                this.categoryFilter.addEventListener('change', () => this.filterQuestions());
+                this.studyMode.addEventListener('change', () => this.changeStudyMode());
+                this.autoFlip.addEventListener('change', () => this.toggleAutoFlip());
+                
+                document.getElementById('shuffleBtn').addEventListener('click', () => this.shuffleQuestions());
+                document.getElementById('markDifficult').addEventListener('click', () => this.markAsDifficult());
+                document.getElementById('resetProgress').addEventListener('click', () => this.resetProgress());
+                
+                document.addEventListener('keydown', (e) => {
+                    if (e.code === 'Space') {
+                        e.preventDefault();
+                        this.flipCard();
+                    } else if (e.code === 'ArrowLeft') {
+                        this.previousCard();
+                    } else if (e.code === 'ArrowRight') {
+                        this.nextCard();
+                    }
+                });
+            }
+
+            updateDisplay() {
+                if (this.filteredQuestions.length === 0) return;
+                
+                const currentQuestion = this.filteredQuestions[this.currentIndex];
+                this.questionText.textContent = currentQuestion.question;
+                this.answerText.textContent = currentQuestion.answer;
+                
+                const displayNumber = this.currentIndex + 1;
+                this.cardNumber.textContent = displayNumber;
+                this.cardNumberBack.textContent = displayNumber;
+                
+                this.progressText.textContent = `Question ${displayNumber} of ${this.filteredQuestions.length}`;
+                this.progressFill.style.width = `${(displayNumber / this.filteredQuestions.length) * 100}%`;
+                
+                this.prevBtn.disabled = this.currentIndex === 0;
+                this.nextBtn.disabled = this.currentIndex === this.filteredQuestions.length - 1;
+                
+                this.viewedQuestions.add(this.currentIndex);
+                this.updateStats();
+                
+                if (this.autoFlip.checked) {
+                    this.startAutoFlip();
+                }
+            }
+
+            flipCard() {
+                this.isFlipped = !this.isFlipped;
+                this.flashcard.classList.toggle('flipped', this.isFlipped);
+                this.clearAutoFlip();
+            }
+
+            nextCard() {
+                if (this.currentIndex < this.filteredQuestions.length - 1) {
+                    this.currentIndex++;
+                    this.isFlipped = false;
+                    this.flashcard.classList.remove('flipped');
+                    this.updateDisplay();
+                }
+            }
+
+            previousCard() {
+                if (this.currentIndex > 0) {
+                    this.currentIndex--;
+                    this.isFlipped = false;
+                    this.flashcard.classList.remove('flipped');
+                    this.updateDisplay();
+                }
+            }
+
+            filterQuestions() {
+                const category = this.categoryFilter.value;
+                if (category === 'all') {
+                    this.filteredQuestions = [...this.questions];
+                } else {
+                    this.filteredQuestions = this.questions.filter(q => q.category === category);
+                }
+                
+                this.currentIndex = 0;
+                this.isFlipped = false;
+                this.flashcard.classList.remove('flipped');
+                this.updateDisplay();
+            }
+
+            changeStudyMode() {
+                const mode = this.studyMode.value;
+                
+                if (mode === 'random') {
+                    this.shuffleQuestions();
+                } else if (mode === 'difficult') {
+                    this.filteredQuestions = this.questions.filter((_, index) => 
+                        this.difficultQuestions.has(index));
+                    if (this.filteredQuestions.length === 0) {
+                        this.filteredQuestions = [...this.questions];
+                    }
+                } else {
+                    this.filteredQuestions = [...this.questions];
+                }
+                
+                this.currentIndex = 0;
+                this.isFlipped = false;
+                this.flashcard.classList.remove('flipped');
+                this.updateDisplay();
+            }
+
+            shuffleQuestions() {
+                for (let i = this.filteredQuestions.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [this.filteredQuestions[i], this.filteredQuestions[j]] = 
+                    [this.filteredQuestions[j], this.filteredQuestions[i]];
+                }
+                this.currentIndex = 0;
+                this.isFlipped = false;
+                this.flashcard.classList.remove('flipped');
+                this.updateDisplay();
+            }
+
+            markAsDifficult() {
+                const originalIndex = this.questions.indexOf(this.filteredQuestions[this.currentIndex]);
+                if (this.difficultQuestions.has(originalIndex)) {
+                    this.difficultQuestions.delete(originalIndex);
+                } else {
+                    this.difficultQuestions.add(originalIndex);
+                }
+                this.updateStats();
+            }
+
+            resetProgress() {
+                this.viewedQuestions.clear();
+                this.difficultQuestions.clear();
+                this.currentIndex = 0;
+                this.isFlipped = false;
+                this.flashcard.classList.remove('flipped');
+                this.updateDisplay();
+            }
+
+            startAutoFlip() {
+                this.clearAutoFlip();
+                this.autoFlipTimeout = setTimeout(() => {
+                    if (!this.isFlipped) {
+                        this.flipCard();
+                    }
+                }, 5000);
+            }
+
+            clearAutoFlip() {
+                if (this.autoFlipTimeout) {
+                    clearTimeout(this.autoFlipTimeout);
+                    this.autoFlipTimeout = null;
+                }
+            }
+
+            toggleAutoFlip() {
+                if (this.autoFlip.checked) {
+                    this.startAutoFlip();
+                } else {
+                    this.clearAutoFlip();
+                }
+            }
+
+            updateStats() {
+                const completionPercent = Math.round((this.viewedQuestions.size / this.filteredQuestions.length) * 100);
+                this.completionRate.textContent = `${completionPercent}%`;
+                this.difficultCount.textContent = this.difficultQuestions.size;
+                this.totalCount.textContent = this.filteredQuestions.length;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new FlashcardApp();
+        });
+    </script>
+</body>
+</html>
