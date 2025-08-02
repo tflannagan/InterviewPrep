@@ -602,109 +602,118 @@
             }
 
             initializeQuestions() {
-                const providedQuestions = [
-                    {
-                        question: "What are some common physical tools for troubleshooting fiber optic issues?",
-                        answer: "• Power/Light Meter\n• Loopback\n• Optical Time Domain Reflectometer (OTDR)\n• Visual Fault Locator\n• 'Good fiber' for reference testing",
-                        category: "troubleshooting"
-                    },
-                    {
-                        question: "Which is typically used for longer distance transmissions?",
-                        answer: "Single mode fiber - it has a smaller core diameter and uses laser light, allowing signals to travel much longer distances with less attenuation compared to multimode fiber.",
-                        category: "networking"
-                    },
-                    {
-                        question: "What is a type of 'connectionless' protocol?",
-                        answer: "UDP (User Datagram Protocol) - Unlike TCP, UDP doesn't establish a connection before sending data and doesn't guarantee delivery or order of packets.",
-                        category: "networking"
-                    },
-                    {
-                        question: "A WAN is different from a LAN because it is...",
-                        answer: "Geographically displaced - WANs cover larger geographical areas and connect multiple LANs across cities, countries, or continents.",
-                        category: "networking"
-                    },
-                    {
-                        question: "What protocol does the 'ping' command utilize?",
-                        answer: "ICMP (Internet Control Message Protocol) - It sends echo request packets and waits for echo reply packets to test connectivity and measure round-trip time.",
-                        category: "networking"
-                    },
-                    {
-                        question: "What is the typical difference between layer 2 and layer 3 network devices?",
-                        answer: "IP Routing - Layer 3 devices (routers) can route packets between different networks using IP addresses, while Layer 2 devices (switches) only forward frames within the same network using MAC addresses.",
-                        category: "networking"
-                    },
-                    {
-                        question: "What is the difference between 2.4GHz and 5GHz WiFi?",
-                        answer: "5GHz has less range than 2.4GHz but offers higher speeds and less congestion. 2.4GHz penetrates walls better and has longer range but is more crowded and slower.",
-                        category: "networking"
-                    },
-                    {
-                        question: "Explain the 7 layers of the OSI Model in detail",
-                        answer: "The Seven OSI Layers split network communications into abstraction layers:\n1. Physical - Electrical connections and signals\n2. Data Link - Frame formatting and MAC addresses\n3. Network - IP routing and addressing\n4. Transport - TCP/UDP and reliable delivery\n5. Session - Connection management\n6. Presentation - Encryption and data formatting\n7. Application - User applications and protocols\nMnemonic: 'Please Do Not Throw Sausage Pizza Away'",
-                        category: "networking"
-                    },
-                    {
-                        question: "During the boot process, what determines the location of the OS?",
-                        answer: "Master Boot Record (MBR) - Located in the first sector of the boot drive, it contains the partition table and boot loader code that identifies where the operating system is located.",
-                        category: "hardware"
-                    },
-                    {
-                        question: "What is RAID and what are the main types?",
-                        answer: "RAID (Redundant Array of Independent Disks) combines multiple drives for performance and/or redundancy:\n• RAID 0 - Striping (performance, no redundancy)\n• RAID 1 - Mirroring (redundancy)\n• RAID 5 - Striping with parity (performance + redundancy)\n• RAID 6 - Double parity (can survive 2 drive failures)\n• RAID 10 - Combination of mirroring and striping",
-                        category: "hardware"
-                    },
-                    {
-                        question: "What is the purpose of UPS in a data center?",
-                        answer: "Uninterruptible Power Supply (UPS) provides backup power during outages, protects against power fluctuations, gives time for graceful shutdown, and maintains power quality to prevent data loss and equipment damage.",
-                        category: "hardware"
-                    },
-                    {
-                        question: "What is the difference between hot swappable and cold swappable components?",
-                        answer: "Hot swappable components can be removed and replaced while the system is running without powering down. Cold swappable components require the system to be powered off before replacement.",
-                        category: "hardware"
-                    },
-                    {
-                        question: "What are the main environmental factors to monitor in a data center?",
-                        answer: "• Temperature (typically 68-75°F)\n• Humidity (45-55% relative humidity)\n• Airflow and cooling efficiency\n• Power consumption and distribution\n• Fire suppression systems\n• Physical security and access control",
-                        category: "general"
-                    },
-                    {
-                        question: "What is SNMP and how is it used in data centers?",
-                        answer: "Simple Network Management Protocol - Used for monitoring and managing network devices. It allows centralized monitoring of servers, switches, routers, and other equipment for performance metrics, alerts, and configuration management.",
-                        category: "networking"
-                    },
-                    {
-                        question: "What are the different types of network cables used in data centers?",
-                        answer: "• Cat5e/Cat6/Cat6a - Copper twisted pair for shorter distances\n• Fiber optic (single-mode/multi-mode) - Long distance, high speed\n• Power cables - Various gauges for different power requirements\n• Console cables - For direct device management\n• Coaxial cables - For specific applications",
-                        category: "hardware"
-                    },
-                    {
-                        question: "What is virtualization and why is it important in data centers?",
-                        answer: "Virtualization creates multiple virtual machines on a single physical server, maximizing hardware utilization, reducing costs, enabling rapid deployment, providing isolation between applications, and simplifying disaster recovery.",
-                        category: "general"
-                    },
-                    {
-                        question: "How do you troubleshoot a server that won't boot?",
-                        answer: "1. Check power connections and LED indicators\n2. Verify POST process and error codes\n3. Check memory seating and configuration\n4. Test with minimal hardware configuration\n5. Check boot device and BIOS settings\n6. Review system logs and error messages\n7. Test power supply and motherboard if needed",
-                        category: "troubleshooting"
-                    },
-                    {
-                        question: "What is the difference between redundancy and fault tolerance?",
-                        answer: "Redundancy provides backup components that take over when primary components fail. Fault tolerance is the system's ability to continue operating normally even when components fail, often using redundant components seamlessly.",
-                        category: "general"
-                    },
-                    {
-                        question: "What security measures are important in data centers?",
-                        answer: "• Physical access controls (biometrics, keycards)\n• Network segmentation and firewalls\n• Monitoring and surveillance systems\n• Environmental controls and alarms\n• Background checks for personnel\n• Incident response procedures\n• Regular security audits and updates",
-                        category: "security"
-                    },
-                    {
-                        question: "What is bandwidth and how do you calculate it?",
-                        answer: "Bandwidth is the maximum data transfer rate of a network connection, measured in bits per second (bps). Calculate by: Data transferred ÷ Time taken. For example: 1GB in 8 seconds = 1 Gigabit per second (considering 8 bits per byte).",
-                        category: "networking"
-                    }
-                ];
-
+               const providedQuestions = [
+    {
+        question: "What are some common physical tools for troubleshooting fiber optic issues?",
+        answer: "- Power/Light Meter\n- Loopback\n- Optical Time Domain Reflectometer\n- Visual Fault Locator\n- \"good fiber\" for reference",
+        category: "troubleshooting"
+    },
+    {
+        question: "Which is typically used for longer distance transmissions?",
+        answer: "Single mode fiber",
+        category: "networking"
+    },
+    {
+        question: "What is a type of \"connectionless\" protocol?",
+        answer: "UDP",
+        category: "networking"
+    },
+    {
+        question: "A WAN is different from a LAN because it is...",
+        answer: "Geographically displaced",
+        category: "networking"
+    },
+    {
+        question: "What protocol does the 'ping' command utilize?",
+        answer: "ICMP",
+        category: "networking"
+    },
+    {
+        question: "What is the typical difference between layer 2 and layer 3 network device?",
+        answer: "IP Routing",
+        category: "networking"
+    },
+    {
+        question: "What is the difference between 2.4GHz and 5GHz wifi?",
+        answer: "5GHz has less range than 2.4GHz",
+        category: "networking"
+    },
+    {
+        question: "Explain the 7 layers of the OSI Model in great detail",
+        answer: "The Seven OSI Layers; OSI Model splits into seven abstraction layers. Physical, data link, network, transport, session, presentation and application. Layer 1 is closest to the most rudimentary electrical connections. \"Please Do Not Throw Sausage Pizza Away\"",
+        category: "networking"
+    },
+    {
+        question: "During the boot process, what determines the location of the OS?",
+        answer: "Master Boot Record",
+        category: "hardware"
+    },
+    {
+        question: "A computer boots up and suddenly shuts off after 15 minutes with no errors, you turn it back on, and it does it after 5 minutes, what is most likely the problem?",
+        answer: "Heat Issue",
+        category: "troubleshooting"
+    },
+    {
+        question: "Which RAID level provides read and write transfer rates but with no redundancy?",
+        answer: "RAID 0",
+        category: "hardware"
+    },
+    {
+        question: "What is the purpose of thermal paste used on a CPU?",
+        answer: "- Reduce heat\n- Prevent movement due to vibration\n- Fill imperfections on the heat sink and CPU",
+        category: "hardware"
+    },
+    {
+        question: "What type of hexadecimal address should be unique and tied to the network interface device?",
+        answer: "MAC Address",
+        category: "networking"
+    },
+    {
+        question: "What are some characteristics between USB 2.0 and USB 3.0 cables?",
+        answer: "USB 3 has 9 pins, versus 4-5 with USB 2\nUSB 2 can carry over longer distance",
+        category: "hardware"
+    },
+    {
+        question: "What is the name of the hardware test that is performed by the BIOS on startup?",
+        answer: "POST",
+        category: "hardware"
+    },
+    {
+        question: "What type of concept allows code to be executed repeatedly?",
+        answer: "for loop",
+        category: "scripting"
+    },
+    {
+        question: "What is the first character of most shell scripts?",
+        answer: "# (pound or hash)",
+        category: "scripting"
+    },
+    {
+        question: "What does the > (greater than) character do in a script?",
+        answer: "Redirects output to a file or another stream",
+        category: "scripting"
+    },
+    {
+        question: "What is a data structure that stores a collection of elements of the same type?",
+        answer: "Array",
+        category: "scripting"
+    },
+    {
+        question: "What are some of the data types used in C and Java?",
+        answer: "- Char\n- Int\n- short\n- long\n- float",
+        category: "scripting"
+    },
+    {
+        question: "This programming concept is a set of steps that follows a procedure and inputs to complete a specific task.",
+        answer: "Algorithm",
+        category: "scripting"
+    },
+    {
+        question: "This concept takes a value and ascribes a symbolic name that can be used later.",
+        answer: "Variable",
+        category: "scripting"
+    }
+];
                 const additionalQuestions = [
                     {
                         question: "What is the difference between TCP and UDP?",
