@@ -520,6 +520,8 @@
                 <option value="hardware">Hardware</option>
                 <option value="troubleshooting">Troubleshooting</option>
                 <option value="security">Security</option>
+                <option value="linux">Linux</option>
+                <option value="scripting">Scripting</option>
                 <option value="general">General</option>
             </select>
         </div>
@@ -819,7 +821,172 @@
                         question: "How do you perform server maintenance safely?",
                         answer: "1. Schedule during maintenance windows\n2. Notify stakeholders\n3. Create rollback plan\n4. Use proper grounding\n5. Follow lockout/tagout procedures\n6. Test changes in non-production first\n7. Document all actions\n8. Verify system functionality post-maintenance",
                         category: "general"
-                    }
+                    },
+                    {
+    "question": "What is the difference between a virtual machine (VM) and a container?",
+    "answer": "A VM virtualizes the entire hardware stack, including the operating system (OS), and is isolated from the host. A container virtualizes the OS layer, sharing the host OS kernel, making it more lightweight, faster to start, and more efficient in resource usage.",
+    "category": "software"
+  },
+  {
+    "question": "What is the purpose of a KVM switch in a data center environment?",
+    "answer": "A Keyboard, Video, and Mouse (KVM) switch allows a single keyboard, monitor, and mouse to be used to control multiple computers. It's used to manage multiple servers from a single workstation, saving space and reducing hardware costs.",
+    "category": "hardware"
+  },
+  {
+    "question": "Describe the process of a server being 'imaged' or 'provisioned.'",
+    "answer": "Server provisioning is the process of setting up a server for a specific role or function. Imaging involves applying a pre-configured OS and software stack to the server's storage, often using tools like PXE booting (Preboot Execution Environment) to load the image over the network, streamlining deployment.",
+    "category": "general"
+  },
+  {
+    "question": "What is the importance of grounding and bonding in a data center?",
+    "answer": "Grounding and bonding are critical for electrical safety and to prevent electrostatic discharge (ESD) from damaging sensitive equipment. Proper grounding provides a path for fault currents, while bonding ensures all metal components are at the same electrical potential, minimizing voltage differences.",
+    "category": "hardware"
+  },
+  {
+    "question": "A server is showing a blinking amber light. What is the first thing you would do?",
+    "answer": "Consult the server's manual or documentation to understand the specific meaning of the blinking amber light. This usually indicates a warning or a hardware fault (e.g., failed fan, memory error, power supply issue). The next steps would be to check system logs and perform a visual inspection of the internal components.",
+    "category": "troubleshooting"
+  },
+  {
+    "question": "What is a 'cold aisle' and a 'hot aisle' and why are they important?",
+    "answer": "A cold aisle is where cool air is supplied to the front of server racks, and a hot aisle is where hot exhaust air from the back of the racks is expelled. This separation is a crucial part of data center cooling, preventing hot air from mixing with cool air, improving efficiency, and preventing equipment overheating.",
+    "category": "general"
+  },
+  {
+    "question": "What is the function of the `ssh` command and what protocol does it use?",
+    "answer": "The `ssh` (Secure Shell) command is used to securely connect to a remote server or device. It utilizes the SSH protocol to provide a cryptographic, encrypted channel for communication, allowing for secure remote command execution and data transfer.",
+    "category": "networking"
+  },
+  {
+    "question": "What is `RAID 5` and what are its pros and cons?",
+    "answer": "RAID 5 (Redundant Array of Independent Disks) stripes data and distributes parity information across a minimum of three disks. Pros: Good balance of performance and fault tolerance, can recover from a single drive failure. Cons: Slower write performance due to parity calculations, and data loss if two drives fail before the failed drive is replaced and rebuilt.",
+    "category": "hardware"
+  },
+  {
+    "question": "How do you check for a process's status or stop a process in Linux?",
+    "answer": "To check a process status, you can use commands like `ps`, `top`, or `htop`. To stop a process, you can use the `kill` command followed by the process ID (PID). For a graceful shutdown, use `kill` without a signal number, which sends a TERM signal. To force a termination, use `kill -9` (SIGKILL).",
+    "category": "scripting"
+  },
+  {
+    "question": "What is the significance of a data center's fire suppression system?",
+    "answer": "Fire suppression systems in data centers are designed to extinguish fires without causing damage to electronic equipment. They often use inert gases (e.g., FM-200, Novec 1230, or CO2) that displace oxygen to suppress the fire, as traditional water-based systems would cause catastrophic damage.",
+    "category": "security"
+  },
+  {
+    "question": "You have a network cable that needs to be run between two racks 150 meters apart. What type of cable would you use and why?",
+    "answer": "You would use single-mode fiber optic cable. Copper Ethernet (e.g., Cat6) is limited to 100 meters. Fiber optic cable is designed for long-distance, high-speed transmission with minimal signal loss, making it the ideal choice for this distance.",
+    "category": "networking"
+  },
+  {
+    "question": "Explain the concept of `latency` in the context of data center operations.",
+    "answer": "Latency is the time delay from the moment a data packet is sent to the moment it is received. In data centers, low latency is critical for applications like real-time trading, gaming, and databases. It is affected by distance, network congestion, and the processing time of network devices.",
+    "category": "networking"
+  },
+  {
+    "question": "What is the importance of proper server rack grounding and bonding?",
+    "answer": "Proper server rack grounding and bonding are crucial for electrical safety and equipment protection. They ensure all metal components are at the same electrical potential, preventing electrostatic discharge (ESD) and providing a safe path for fault currents in case of an electrical surge. This minimizes risk to both personnel and sensitive hardware.",
+    "category": "hardware"
+  },
+    {
+    "question": "What is the difference between a switch and a router?",
+    "answer": "A switch operates at Layer 2 (Data Link) of the OSI model and forwards data frames within a single network segment based on MAC addresses. A router operates at Layer 3 (Network) and routes data packets between different networks based on IP addresses.",
+    "category": "networking"
+  },
+  {
+    "question": "Explain the three-way handshake in TCP.",
+    "answer": "The three-way handshake is the process used by TCP to establish a connection. It involves three steps: 1. The client sends a SYN (synchronize) packet to the server. 2. The server responds with a SYN-ACK (synchronize-acknowledge) packet. 3. The client sends an ACK (acknowledge) packet to the server, and the connection is established.",
+    "category": "networking"
+  },
+  {
+    "question": "What is the purpose of a subnet mask?",
+    "answer": "A subnet mask is used to divide an IP address into two parts: the network address and the host address. It helps a network device determine if a destination IP address is on the same local network or a remote network, which helps with routing decisions.",
+    "category": "networking"
+  },
+  {
+    "question": "What is the `traceroute` command used for?",
+    "answer": "The `traceroute` command is used to trace the path a packet takes to reach a destination host. It displays a list of the routers (hops) along the path, along with the round-trip time for each hop, which is useful for diagnosing network latency and connectivity issues.",
+    "category": "networking"
+  },
+  {
+    "question": "In a shell script, what is the purpose of the `#!/bin/bash` line?",
+    "answer": "This line is known as the 'shebang.' It tells the operating system which interpreter to use to execute the script. `#!/bin/bash` specifies that the script should be run using the Bash shell, which ensures consistency and proper execution.",
+    "category": "scripting"
+  },
+  {
+    "question": "How do you define a variable and print its value in a Bash script?",
+    "answer": "To define a variable, you use `variable_name=\"value\"`. To print its value, you use `echo $variable_name`. For example: `my_var=\"Hello, Google!\"` followed by `echo $my_var` would print 'Hello, Google!'.",
+    "category": "scripting"
+  },
+  {
+    "question": "What is the difference between the `&&` and `||` operators in shell scripting?",
+    "answer": "`&&` (AND) is a logical operator that executes the second command only if the first command succeeds (returns an exit code of 0). `||` (OR) is a logical operator that executes the second command only if the first command fails (returns a non-zero exit code).",
+    "category": "scripting"
+  },
+  {
+    "question": "What is the function of the `grep` command in Linux?",
+    "answer": "The `grep` command (Global Regular Expression Print) searches for a specific pattern of text within one or more files. It is a powerful tool for filtering output, analyzing log files, and finding specific information quickly.",
+    "category": "scripting"
+  },
+  {
+    "question": "What is a `for` loop and when would you use it?",
+    "answer": "A `for` loop is a control flow statement that allows you to execute a block of code a specific number of times or for each item in a list. You would use it for tasks like iterating through a list of files, processing multiple user inputs, or performing a task on a range of numbers.",
+    "category": "scripting"
+  },
+  {
+    "question": "How do you check a server's network configuration in Linux?",
+    "answer": "You can use several commands, including `ifconfig` (for older systems) or `ip addr` (for modern systems) to view IP addresses, subnet masks, and network interface details. The `netstat` or `ss` commands can show active network connections and listening ports.",
+    "category": "networking"
+  },
+   {
+    "question": "What is the difference between a hard link and a soft (symbolic) link?",
+    "answer": "A hard link creates a new file entry that points to the same inode as the original file. If the original file is deleted, the hard link still works. A soft link (or symlink) is a file that contains a path to another file. If the original file is deleted, the soft link becomes broken.",
+    "category": "linux"
+  },
+  {
+    "question": "How do you check the disk space usage of a file system in Linux?",
+    "answer": "The `df` (disk free) command is used to display the amount of available disk space for file systems. The `du` (disk usage) command is used to estimate file space usage for a specific file or directory. Using `df -h` and `du -sh` provides human-readable output.",
+    "category": "linux"
+  },
+  {
+    "question": "What is the purpose of the `chmod` command?",
+    "answer": "The `chmod` (change mode) command is used to change the permissions of a file or directory. Permissions include read (r), write (w), and execute (x) for three categories of users: the file owner (u), the group (g), and all others (o).",
+    "category": "linux"
+  },
+  {
+    "question": "How do you view the contents of a text file in Linux without using a text editor?",
+    "answer": "You can use commands like `cat`, `less`, or `more`. The `cat` command displays the entire file content at once. `less` and `more` are paginating tools that allow you to view the file one screen at a time, which is useful for large files.",
+    "category": "linux"
+  },
+  {
+    "question": "Explain the difference between the `sudo` and `su` commands.",
+    "answer": "`sudo` (superuser do) allows a permitted user to execute a single command as the superuser or another user. `su` (substitute user) is used to switch to another user account, and by default, it switches to the root user, requiring the root password.",
+    "category": "linux"
+  },
+  {
+    "question": "What is the purpose of the `crontab` command?",
+    "answer": "The `crontab` command is used to schedule tasks to run automatically at a specific time or interval. These scheduled tasks are called 'cron jobs' and are commonly used for system maintenance, backups, and running scripts at set times.",
+    "category": "linux"
+  },
+  {
+    "question": "How do you check which processes are running on a Linux system?",
+    "answer": "You can use the `ps` command to list processes currently running on the system. `ps aux` is a common combination that shows all processes, their users, and resource usage. The `top` or `htop` commands provide a real-time, interactive view of running processes and system resources.",
+    "category": "linux"
+  },
+  {
+    "question": "What is the purpose of the `/etc` directory in Linux?",
+    "answer": "The `/etc` directory (et cetera) is the central location for system-wide configuration files. It contains configuration files for services, daemons, users, network settings, and other system-level settings. It's one of the most important directories for system administrators.",
+    "category": "linux"
+  },
+  {
+    "question": "How do you search for a file or directory in Linux?",
+    "answer": "The `find` command is a powerful tool for searching files and directories based on various criteria like name, type, size, and modification time. The `locate` command is another option, which is often faster as it searches a pre-built database of files, but it may not be up to date.",
+    "category": "linux"
+  },
+  {
+    "question": "What is the difference between `reboot` and `shutdown`?",
+    "answer": "The `reboot` command immediately restarts the system. The `shutdown` command is a more controlled way to halt or reboot the system. `shutdown` can be scheduled for a specific time and allows for sending a warning message to logged-in users before the system shuts down, which is crucial for server environments.",
+    "category": "linux"
+  }
                 ];
 
                 this.questions = [...providedQuestions, ...additionalQuestions];
