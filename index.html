@@ -133,10 +133,9 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 40px;
+            padding: 60px 40px 60px 40px;
             text-align: center;
+            overflow: hidden;
         }
 
         .card-front {
@@ -156,20 +155,34 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            overflow-y: auto;
+            align-items: center;
+            overflow: hidden;
         }
 
         .question-text {
             font-size: 1.4rem;
             font-weight: 600;
             line-height: 1.6;
-            margin-bottom: 20px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            text-align: center;
+            width: 100%;
+            padding: 0 15px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .answer-text {
             font-size: 1.2rem;
             line-height: 1.7;
             white-space: pre-line;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            text-align: left;
+            flex: 1;
+            padding: 30px 15px 0 15px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .card-label {
@@ -558,7 +571,7 @@
             }
 
             .card-face {
-                padding: 20px 15px;
+                padding: 60px 15px 60px 15px;
             }
 
             .question-text {
