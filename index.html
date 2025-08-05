@@ -13,7 +13,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-             font-family: "Google Sans Code", monospace !important;
+            font-family: "Google Sans Code", monospace !important;
         }
 
         body {
@@ -25,6 +25,7 @@
             align-items: center;
             padding: 20px;
             color: #333;
+            touch-action: manipulation;
         }
 
         .header {
@@ -107,6 +108,7 @@
             max-width: 800px;
             height: 500px;
             margin-bottom: 30px;
+            position: relative;
         }
 
         .flashcard {
@@ -209,6 +211,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            touch-action: manipulation;
         }
 
         .nav-btn:hover {
@@ -243,6 +246,7 @@
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
+            touch-action: manipulation;
         }
 
         .action-btn:hover {
@@ -302,24 +306,45 @@
             margin-top: 20px;
         }
 
-        .mobile-swipe-hint {
-            display: none;
+        .mobile-hint {
             position: fixed;
-            bottom: 100px;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0,0,0,0.8);
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.9);
             color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
+            padding: 20px 25px;
+            border-radius: 15px;
             font-size: 0.9rem;
-            z-index: 1000;
-            animation: fadeInOut 3s ease-in-out;
+            z-index: 2000;
+            text-align: center;
+            line-height: 1.5;
+            max-width: 280px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
         }
 
-        @keyframes fadeInOut {
-            0%, 100% { opacity: 0; }
-            20%, 80% { opacity: 1; }
+        .mobile-hint.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .hint-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .touch-feedback {
@@ -327,9 +352,32 @@
             transition: transform 0.1s ease;
         }
 
+        .swipe-indicator {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: rgba(255,255,255,0.7);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .swipe-indicator.left {
+            left: 20px;
+        }
+
+        .swipe-indicator.right {
+            right: 20px;
+        }
+
+        .swipe-indicator.show {
+            opacity: 1;
+        }
+
         @media (max-width: 768px) {
             body {
-                padding: 10px;
+                padding: 15px 10px;
                 font-size: 14px;
             }
 
@@ -338,8 +386,8 @@
             }
             
             .header h1 {
-                font-size: 1.8rem;
-                margin-bottom: 5px;
+                font-size: 2rem;
+                margin-bottom: 8px;
             }
 
             .header p {
@@ -347,106 +395,166 @@
             }
             
             .flashcard-container {
-                height: 450px;
-                margin-bottom: 20px;
+                height: 400px;
+                margin-bottom: 25px;
             }
             
             .card-face {
-                padding: 25px 20px;
+                padding: 30px 20px;
             }
             
             .question-text {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
                 line-height: 1.5;
+                margin-bottom: 15px;
             }
             
             .answer-text {
-                font-size: 1rem;
+                font-size: 1.1rem;
                 line-height: 1.6;
             }
             
             .controls {
                 flex-direction: column;
-                gap: 15px;
+                gap: 12px;
                 margin-bottom: 20px;
+                width: 100%;
             }
 
             .control-group {
                 width: 100%;
                 justify-content: space-between;
-                padding: 12px 20px;
+                padding: 15px 20px;
+                border-radius: 15px;
             }
 
             .control-group select, .control-group input {
-                padding: 10px 15px;
+                padding: 12px 15px;
                 font-size: 16px;
-                min-height: 44px;
+                min-height: 48px;
+                border-radius: 12px;
             }
             
             .navigation {
                 width: 100%;
                 justify-content: space-between;
-                margin-bottom: 15px;
+                margin-bottom: 20px;
+                gap: 15px;
             }
 
             .nav-btn {
                 flex: 1;
-                max-width: 45%;
                 padding: 18px 20px;
                 font-size: 1rem;
-                min-height: 50px;
+                min-height: 54px;
+                border-radius: 15px;
             }
 
             .action-buttons {
-                gap: 10px;
-                margin-bottom: 15px;
+                gap: 12px;
+                margin-bottom: 20px;
+                width: 100%;
             }
 
             .action-btn {
                 padding: 15px 18px;
                 font-size: 0.9rem;
-                min-height: 44px;
+                min-height: 48px;
                 flex: 1;
-                min-width: calc(50% - 5px);
+                min-width: calc(50% - 6px);
+                border-radius: 12px;
             }
 
             .progress-bar {
                 margin-bottom: 15px;
-                height: 10px;
+                height: 12px;
+                border-radius: 6px;
             }
 
             .stats {
-                padding: 12px 20px;
+                padding: 15px 20px;
                 font-size: 0.9rem;
                 margin-top: 15px;
+                border-radius: 12px;
             }
 
             .card-label, .card-number {
                 font-size: 0.8rem;
-                padding: 6px 12px;
+                padding: 8px 14px;
             }
 
             .flip-hint {
-                font-size: 0.75rem;
-                padding: 6px 12px;
-            }
-
-            .mobile-swipe-hint {
-                display: block;
+                font-size: 0.8rem;
+                padding: 8px 16px;
+                display: none;
             }
         }
 
         @media (max-width: 480px) {
             body {
-                padding: 8px;
+                padding: 10px 8px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .flashcard-container {
+                height: 360px;
+            }
+
+            .card-face {
+                padding: 25px 15px;
+            }
+
+            .question-text {
+                font-size: 1.1rem;
+            }
+
+            .answer-text {
+                font-size: 1rem;
+            }
+
+            .control-group {
+                padding: 12px 15px;
+            }
+
+            .nav-btn {
+                padding: 16px 15px;
+                font-size: 0.95rem;
+            }
+
+            .action-btn {
+                padding: 14px 12px;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (orientation: landscape) and (max-height: 600px) {
+            .header {
+                margin-bottom: 10px;
             }
 
             .header h1 {
                 font-size: 1.6rem;
+                margin-bottom: 5px;
+            }
+
+            .header p {
+                display: none;
             }
 
             .flashcard-container {
-                height: 400px;
+                height: 280px;
+                margin-bottom: 15px;
+            }
+
+            .controls {
+                margin-bottom: 10px;
+            }
+
+            .stats {
+                margin-top: 10px;
             }
 
             .card-face {
@@ -460,55 +568,12 @@
             .answer-text {
                 font-size: 0.9rem;
             }
-
-            .control-group {
-                padding: 10px 15px;
-            }
-
-            .nav-btn {
-                padding: 16px 15px;
-                font-size: 0.9rem;
-            }
-
-            .action-btn {
-                padding: 12px 10px;
-                font-size: 0.8rem;
-            }
-        }
-
-        @media (orientation: landscape) and (max-height: 600px) {
-            .header {
-                margin-bottom: 10px;
-            }
-
-            .header h1 {
-                font-size: 1.4rem;
-                margin-bottom: 5px;
-            }
-
-            .header p {
-                display: none;
-            }
-
-            .flashcard-container {
-                height: 300px;
-                margin-bottom: 15px;
-            }
-
-            .controls {
-                margin-bottom: 10px;
-            }
-
-            .stats {
-                margin-top: 10px;
-            }
         }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>Data Technician Interview Prep</h1>
-       
     </div>
 
     <div class="controls">
@@ -547,6 +612,8 @@
     </div>
 
     <div class="flashcard-container">
+        <div class="swipe-indicator left" id="swipeLeft">‹</div>
+        <div class="swipe-indicator right" id="swipeRight">›</div>
         <div class="flashcard" id="flashcard">
             <div class="card-face card-front">
                 <div class="card-label">Question</div>
@@ -582,8 +649,12 @@
         <div>Progress: <span id="completionRate">0%</span> | Difficult: <span id="difficultCount">0</span> | Total: <span id="totalCount">150</span></div>
     </div>
 
-    <div class="mobile-swipe-hint" id="swipeHint">
-        ← Swipe left/right to navigate • Tap to flip →
+    <div class="mobile-hint" id="mobileHint">
+        <button class="hint-close" id="hintClose">×</button>
+        <div>📱 <strong>Mobile Tips:</strong></div>
+        <div>• Tap card to flip</div>
+        <div>• Swipe left/right to navigate</div>
+        <div>• Use arrow keys if available</div>
     </div>
 
     <script>
@@ -596,11 +667,16 @@
                 this.difficultQuestions = new Set();
                 this.filteredQuestions = [];
                 this.autoFlipTimeout = null;
+                this.touchStartX = 0;
+                this.touchEndX = 0;
+                this.isSwiping = false;
+                this.mobileHintShown = localStorage.getItem('mobileHintShown') === 'true';
                 
                 this.initializeQuestions();
                 this.initializeElements();
                 this.bindEvents();
                 this.updateDisplay();
+                this.showMobileHint();
             }
 
             initializeQuestions() {
@@ -1009,6 +1085,10 @@
                 this.completionRate = document.getElementById('completionRate');
                 this.difficultCount = document.getElementById('difficultCount');
                 this.totalCount = document.getElementById('totalCount');
+                this.mobileHint = document.getElementById('mobileHint');
+                this.hintClose = document.getElementById('hintClose');
+                this.swipeLeft = document.getElementById('swipeLeft');
+                this.swipeRight = document.getElementById('swipeRight');
             }
 
             bindEvents() {
@@ -1018,10 +1098,15 @@
                 this.categoryFilter.addEventListener('change', () => this.filterQuestions());
                 this.studyMode.addEventListener('change', () => this.changeStudyMode());
                 this.autoFlip.addEventListener('change', () => this.toggleAutoFlip());
+                this.hintClose.addEventListener('click', () => this.closeMobileHint());
                 
                 document.getElementById('shuffleBtn').addEventListener('click', () => this.shuffleQuestions());
                 document.getElementById('markDifficult').addEventListener('click', () => this.markAsDifficult());
                 document.getElementById('resetProgress').addEventListener('click', () => this.resetProgress());
+                
+                this.flashcard.addEventListener('touchstart', (e) => this.handleTouchStart(e), { passive: true });
+                this.flashcard.addEventListener('touchmove', (e) => this.handleTouchMove(e), { passive: true });
+                this.flashcard.addEventListener('touchend', (e) => this.handleTouchEnd(e), { passive: true });
                 
                 document.addEventListener('keydown', (e) => {
                     if (e.code === 'Space') {
@@ -1033,6 +1118,71 @@
                         this.nextCard();
                     }
                 });
+            }
+
+            handleTouchStart(e) {
+                this.touchStartX = e.touches[0].clientX;
+                this.isSwiping = false;
+            }
+
+            handleTouchMove(e) {
+                if (!this.touchStartX) return;
+                
+                this.touchEndX = e.touches[0].clientX;
+                const diff = this.touchStartX - this.touchEndX;
+                
+                if (Math.abs(diff) > 10) {
+                    this.isSwiping = true;
+                    
+                    if (diff > 0 && this.currentIndex < this.filteredQuestions.length - 1) {
+                        this.swipeRight.classList.add('show');
+                        this.swipeLeft.classList.remove('show');
+                    } else if (diff < 0 && this.currentIndex > 0) {
+                        this.swipeLeft.classList.add('show');
+                        this.swipeRight.classList.remove('show');
+                    }
+                }
+            }
+
+            handleTouchEnd(e) {
+                if (!this.touchStartX || !this.touchEndX) return;
+                
+                const diff = this.touchStartX - this.touchEndX;
+                const minSwipeDistance = 50;
+                
+                this.swipeLeft.classList.remove('show');
+                this.swipeRight.classList.remove('show');
+                
+                if (this.isSwiping && Math.abs(diff) > minSwipeDistance) {
+                    if (diff > 0) {
+                        this.nextCard();
+                    } else {
+                        this.previousCard();
+                    }
+                } else if (!this.isSwiping) {
+                    this.flipCard();
+                }
+                
+                this.touchStartX = 0;
+                this.touchEndX = 0;
+                this.isSwiping = false;
+            }
+
+            showMobileHint() {
+                if (!this.mobileHintShown && window.innerWidth <= 768) {
+                    setTimeout(() => {
+                        this.mobileHint.classList.add('show');
+                        setTimeout(() => {
+                            this.closeMobileHint();
+                        }, 4000);
+                    }, 1000);
+                }
+            }
+
+            closeMobileHint() {
+                this.mobileHint.classList.remove('show');
+                this.mobileHintShown = true;
+                localStorage.setItem('mobileHintShown', 'true');
             }
 
             updateDisplay() {
